@@ -1,4 +1,3 @@
-
 import streamlit as st
 from transformers import AutoModel, AutoTokenizer, MarianMTModel, MarianTokenizer
 from PIL import Image
@@ -119,6 +118,3 @@ if image_file is not None:
 
         # Clean up the temporary file after use
         os.remove(temp_file_path)
-
-# Note: No need for if __name__ == "__main__": st.run()
-
