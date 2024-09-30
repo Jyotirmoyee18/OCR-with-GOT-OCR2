@@ -1,3 +1,5 @@
+pyspellchecker>=0.7.2
+regex>=2023.6.3
 opencv-python
 pytesseract
 streamlit
