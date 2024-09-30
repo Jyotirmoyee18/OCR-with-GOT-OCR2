@@ -7,3 +7,4 @@ transformers==4.21.1
 tokenizers==0.11.1
 pip==24.2
 tiktoken
+verovio
