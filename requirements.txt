@@ -7,3 +7,4 @@ regex==2022.10.31
 pyspellchecker>=0.7.2
 numpy>=1.19,<1.24 
 opencv-python-headless
+setuptools>=57.0
