@@ -6,9 +6,9 @@ import os
 import easyocr
 import re
 import pickle                                                           
-5 import numpy as np                                                      
-6 import math                                                             
-7 import cv2                                                              
+import numpy as np                                                      
+import math                                                             
+import cv2                                                              
 from PIL import Image, JpegImagePlugin                                  
 from scipy import ndimage                                               
 import hashlib
