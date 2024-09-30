@@ -11,3 +11,4 @@ tiktoken==0.7.0
 tokenizers==0.20.0 
 pip
 SentencePiece
+torch==2.0.1
