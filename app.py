@@ -5,14 +5,29 @@ import tempfile
 import os
 import easyocr
 import re
+import torch
+
+# Check if GPU is available, else default to CPU
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+st.write(f"Using device: {device.upper()}")
 
 # Load EasyOCR reader with English and Hindi language support
 reader = easyocr.Reader(['en', 'hi'])  # 'en' for English, 'hi' for Hindi
 
 # Load the GOT-OCR2 model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained('stepfun-ai/GOT-OCR2_0', trust_remote_code=True)
-model = AutoModel.from_pretrained('stepfun-ai/GOT-OCR2_0', trust_remote_code=True, low_cpu_mem_usage=True, device_map='cuda', use_safetensors=True, pad_token_id=tokenizer.eos_token_id)
-model = model.eval().cuda()
+model = AutoModel.from_pretrained(
+    'stepfun-ai/GOT-OCR2_0', 
+    trust_remote_code=True, 
+    low_cpu_mem_usage=True, 
+    device_map='auto' if device == 'cuda' else None,  # Handle GPU or CPU appropriately
+    use_safetensors=True, 
+    pad_token_id=tokenizer.eos_token_id
+)
+
+# Move model to appropriate device (GPU or CPU)
+model = model.to(device)
+model = model.eval()
 
 # Load MarianMT translation model for Hindi to English translation
 translation_tokenizer = MarianTokenizer.from_pretrained('Helsinki-NLP/opus-mt-hi-en')
@@ -99,3 +114,4 @@ if image_file is not None:
         os.remove(temp_file_path)
 
 # Note: No need for if __name__ == "__main__": st.run()
+
