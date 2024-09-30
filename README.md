@@ -1,5 +1,7 @@
 # OCR-with-GOT-OCR2
 
+check out my huggingface id:
+DeepDiveDev/OCR
 
 check the demo: 
   Local URL: http://localhost:8501
