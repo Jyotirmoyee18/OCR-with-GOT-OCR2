@@ -4,5 +4,5 @@ opencv-python
 easyocr
 numpy==2.1.1
 transformers==4.21.1
-tokenizers==0.13.3
+tokenizers==0.11.1
 pip==24.2
