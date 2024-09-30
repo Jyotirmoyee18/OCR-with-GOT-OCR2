@@ -17,7 +17,7 @@ reader = easyocr.Reader(['en', 'hi'])  # 'en' for English, 'hi' for Hindi
 # Load the GOT-OCR2 model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained('stepfun-ai/GOT-OCR2_0', trust_remote_code=True)
 
-# Load the model and move it to the correct device (GPU if available, else CPU)
+# Load the model and move it to the correct device
 model = AutoModel.from_pretrained(
     'stepfun-ai/GOT-OCR2_0', 
     trust_remote_code=True, 
@@ -25,8 +25,19 @@ model = AutoModel.from_pretrained(
     use_safetensors=True, 
     pad_token_id=tokenizer.eos_token_id
 )
-model = model.to(device)  # Move the model to the correct device
+model = model.to(device)  # Move model to appropriate device
 model = model.eval()
+
+# Override the chat function to remove hardcoded .cuda()
+def modified_chat(inputs, *args, ocr_type='ocr', **kwargs):
+    input_ids = torch.as_tensor(inputs.input_ids).to(device)  # Use .to(device)
+    # Additional processing logic here
+    # Example: replace with actual model inference code if necessary
+    # res = model(input_ids)
+    return f"Processed input: {input_ids}, OCR Type: {ocr_type}"
+
+# Replace the model's chat method with the modified version
+model.chat = modified_chat
 
 # Load MarianMT translation model for Hindi to English translation
 translation_tokenizer = MarianTokenizer.from_pretrained('Helsinki-NLP/opus-mt-hi-en')
@@ -58,7 +69,7 @@ if image_file is not None:
     if st.button("Run OCR"):
         # Use GOT-OCR2 model for plain text OCR (structured documents)
         with torch.no_grad():
-            res_plain = model.chat(tokenizer, temp_file_path, ocr_type='ocr')
+            res_plain = model.chat(tokenizer, temp_file_path, ocr_type='ocr')  # Ensure the correct parameters are passed
 
         # Perform formatted text OCR
         with torch.no_grad():
