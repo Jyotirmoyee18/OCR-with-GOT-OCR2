@@ -5,6 +5,13 @@ import tempfile
 import os
 import easyocr
 import re
+import pickle                                                           
+5 import numpy as np                                                      
+6 import math                                                             
+7 import cv2                                                              
+from PIL import Image, JpegImagePlugin                                  
+from scipy import ndimage                                               
+import hashlib
 
 # Load EasyOCR reader with English and Hindi language support
 reader = easyocr.Reader(['en', 'hi'])  # 'en' for English, 'hi' for Hindi
