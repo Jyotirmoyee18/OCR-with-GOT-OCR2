@@ -3,7 +3,7 @@ streamlit
 opencv-python
 easyocr
 numpy==2.1.1
-transformers==4.21.1
+transformers==4.45.1
 tokenizers==0.20.0
 pip
 tiktoken
