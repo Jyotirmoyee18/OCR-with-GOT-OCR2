@@ -1,3 +1,4 @@
+
 import streamlit as st
 from transformers import AutoModel, AutoTokenizer, MarianMTModel, MarianTokenizer
 from PIL import Image
@@ -16,11 +17,13 @@ reader = easyocr.Reader(['en', 'hi'])  # 'en' for English, 'hi' for Hindi
 
 # Load the GOT-OCR2 model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained('stepfun-ai/GOT-OCR2_0', trust_remote_code=True)
+
+# Load the model with low memory usage on CPU or auto-map for GPU if available
 model = AutoModel.from_pretrained(
     'stepfun-ai/GOT-OCR2_0', 
     trust_remote_code=True, 
     low_cpu_mem_usage=True, 
-    device_map='auto' if device == 'cuda' else None,  # Handle GPU or CPU appropriately
+    device_map='auto' if device == 'cuda' else None,  # Use GPU if available, else None
     use_safetensors=True, 
     pad_token_id=tokenizer.eos_token_id
 )
@@ -58,8 +61,12 @@ if image_file is not None:
     
     # Button to run OCR
     if st.button("Run OCR"):
-        # Use GOT-OCR2 model for plain text OCR (structured documents)
-        res_plain = model.chat(tokenizer, temp_file_path, ocr_type='ocr')
+        # Ensure model runs on CPU if GPU isn't available
+        if device == 'cuda':
+            res_plain = model.chat(tokenizer, temp_file_path, ocr_type='ocr')
+        else:
+            with torch.no_grad():  # Disable gradient calculations to save memory on CPU
+                res_plain = model.chat(tokenizer, temp_file_path, ocr_type='ocr')
 
         # Perform formatted text OCR
         res_format = model.chat(tokenizer, temp_file_path, ocr_type='format')
