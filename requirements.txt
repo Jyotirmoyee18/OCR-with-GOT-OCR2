@@ -9,4 +9,4 @@ accelerate==0.34.2
 verovio==4.3.1
 tiktoken==0.7.0
 tokenizers==0.20.0 
-pip==24.2
+pip==24.0
