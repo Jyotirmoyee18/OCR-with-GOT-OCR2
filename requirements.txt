@@ -1,3 +1,6 @@
+opencv-python
+pytesseract
+streamlit
 matplotlib
 transformers
 accelerate==0.34.2
