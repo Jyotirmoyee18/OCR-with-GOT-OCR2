@@ -4,7 +4,7 @@ opencv-python
 easyocr
 numpy==2.1.1
 transformers==4.21.1
-tokenizers
-pip==24.2
+tokenizers==0.20.0
+pip
 tiktoken
 verovio
