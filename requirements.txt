@@ -1,4 +1,3 @@
---upgrade pip
 opencv-python-headless
 streamlit
 opencv-python
