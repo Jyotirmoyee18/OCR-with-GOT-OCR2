@@ -29,11 +29,23 @@ model = model.to(device)  # Move model to appropriate device
 model = model.eval()
 
 # Override the chat function to remove hardcoded .cuda()
-def modified_chat(inputs, *args, ocr_type='ocr', **kwargs):
-    input_ids = torch.as_tensor(inputs.input_ids).to(device)  # Use .to(device)
-    # Additional processing logic here
-    # Example: replace with actual model inference code if necessary
-    # res = model(input_ids)
+def modified_chat(tokenizer, temp_file_path, ocr_type='ocr', *args, **kwargs):
+    # Load the image data, perform OCR and get text
+    with open(temp_file_path, 'rb') as f:
+        image_data = f.read()
+    
+    # Assuming OCR process to extract text from image
+    extracted_text = "some OCR processed text"  # Placeholder, replace with actual OCR result
+
+    # Tokenize the extracted text
+    inputs = tokenizer(extracted_text, return_tensors="pt", truncation=True, padding=True)
+    
+    # Move input_ids to the appropriate device
+    input_ids = inputs['input_ids'].to(device)  # Use .to(device)
+    
+    # Perform any necessary processing using the model
+    # Example: res = model(input_ids)  # Uncomment and implement model processing
+    
     return f"Processed input: {input_ids}, OCR Type: {ocr_type}"
 
 # Replace the model's chat method with the modified version
