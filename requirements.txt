@@ -4,9 +4,9 @@ opencv-python-headless==4.10.0.84
 Pillow==10.4.0
 numpy==2.1.1
 scipy==1.14.1
-transformers==0.20.0
+transformers
 accelerate==0.34.2
 verovio==4.3.1
 tiktoken==0.7.0
 tokenizers==0.20.0 
-pip==24.0
+pip
