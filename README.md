@@ -12,6 +12,10 @@ git clone https://huggingface.co/spaces/DeepDiveDev/OCR
 GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/spaces/DeepDiveDev/OCR
 
 
+#check the demo:
+https://huggingface.co/spaces/DeepDiveDev/OCR
+
+
 check the demo: 
   Local URL: http://localhost:8501
   Network URL: http://10.25.61.76:8501
