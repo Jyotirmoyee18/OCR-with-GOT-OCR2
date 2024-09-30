@@ -8,3 +8,5 @@ pyspellchecker>=0.7.2
 numpy<2
 opencv-python-headless
 setuptools>=57.0
+numpy==1.22.0
+opencv-python
