@@ -1,3 +1,8 @@
+@st.cache_resource
+def load_model():
+    # Load your model here
+    return model
+
 import streamlit as st
 from transformers import AutoModel, AutoTokenizer, MarianMTModel, MarianTokenizer
 from PIL import Image
