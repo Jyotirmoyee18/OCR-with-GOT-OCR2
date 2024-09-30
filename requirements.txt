@@ -1,7 +1,6 @@
-
 opencv-python-headless
 streamlit
 opencv-python
 easyocr
-numpy
+numpy==2.1.1
 transformers==4.21.1
